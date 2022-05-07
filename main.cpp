@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "Board.hpp"
 #include "IA.hpp"
 
 int main()
@@ -19,7 +20,7 @@ int main()
          << board.getBoard() << endl;
 
     string expression = ".X.";
-    IA ia("file");
+    IA ia = IA("patterns.csv");
     int count = ia.countPattern(board,expression);
     cout << count << endl;
 

@@ -4,7 +4,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <vector>
-#include <regex>
+#include <fstream>
 
 #include "Board.hpp"
 
@@ -14,6 +14,8 @@ class IA
 {
 private:
     unordered_map<string, int> hashTable;
+    vector<string> patterns;
+    vector<int> patternScores;
 
 public:
     IA(const string patternFile);

@@ -1,5 +1,25 @@
 #include "IA.hpp"
-IA::IA(const string patternFile){}
+#include <array>
+#include <string>
+#include <sstream>
+#include <regex>
+
+IA::IA(const string patternFileName) {
+    ifstream file(patternFileName);
+
+    if (!file.is_open()) {
+        cout << "could not open pattern file";
+    }
+
+    string pattern;
+    while (getline(file >> ws, pattern, ',')){
+        int score;
+        if (file >> score) {
+            patterns.push_back(pattern);
+            patternScores.push_back(score);
+        }
+    }    
+}
 
 int IA::evaluation(Board &board, bool isMax)
 {
@@ -32,6 +52,7 @@ int IA::countPatternRow(const string board, string pattern)
     }
     return count;
 }
+
 int IA::countPatternColumn(const string board, string pattern)
 {   
     //TO FINISH
@@ -52,6 +73,7 @@ int IA::countPatternColumn(const string board, string pattern)
     );
     return count;
 }
+
 int IA::countPatternFirstDiag(const string board, string pattern)
 {
     //TODO
@@ -61,6 +83,7 @@ int IA::countPatternFirstDiag(const string board, string pattern)
     
     return count;
 }
+
 int IA::countPatternSecondDiag(const string board, string pattern)
 {
     //TODO
@@ -69,15 +92,4 @@ int IA::countPatternSecondDiag(const string board, string pattern)
     regex const reg(pattern);
 
     return count;
-}
-int IA::minimaxAlphaBeta(Board &board, int depth, bool isMax, int alpha, int beta, int x, int y)
-{
-    return 0;
-}
-void IA::addToHashTable(Board &board, int eval)
-{
-}
-bool IA::checkHashTable(Board &board)
-{
-    return false;
 }
