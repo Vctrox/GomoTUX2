@@ -9,7 +9,7 @@ using namespace std;
 const int N = 15;
 const char PLAYER_SYMBOL = 'X';
 const char COMPUTER_SYMBOL = 'O';
-const char EMPTY_SYMBOL = '.';
+const char EMPTY_SYMBOL = '-';
 
 class Board
 {
