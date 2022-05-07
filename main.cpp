@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Board.hpp"
+#include "IA.hpp"
 
 int main()
 {
@@ -18,6 +19,8 @@ int main()
 
     cout << endl
          << board.getBoard() << endl;
+
+    IA ia = IA("patterns.csv");
 
     return 0;
 }

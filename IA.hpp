@@ -1,6 +1,10 @@
+#ifndef IA_H
+#define IA_H
+
 #include <iostream>
 #include <unordered_map>
 #include <vector>
+#include <fstream>
 
 #include "Board.hpp"
 
@@ -9,6 +13,8 @@ using namespace std;
 class IA {
     private:
         unordered_map<string, int> hashTable;
+        vector<string> patterns;
+        vector<int> patternScores;
 
     public:
         IA(const string patternFile);
@@ -18,3 +24,5 @@ class IA {
         void addToHashTable(Board & board, int eval);
         bool checkHashTable(Board & board);
 };
+
+#endif
