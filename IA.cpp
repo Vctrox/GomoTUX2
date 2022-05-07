@@ -1,5 +1,6 @@
 #include "IA.hpp"
 #include <array>
+#include <limits>
 #include <string>
 #include <sstream>
 #include <regex>
@@ -92,4 +93,20 @@ int IA::countPatternSecondDiag(const string board, string pattern)
     regex const reg(pattern);
 
     return count;
+}
+
+int IA::minimaxAlphaBeta(Board &board, int depth, bool isMax, int alpha, int beta, int x, int y) {
+    char c = isMax ? board.getComputerSymbol() : board.getPlayerSymbol();
+    
+    board.setValue(x, y, c);
+
+    if (board.winMove(x, y)) {
+        board.setValue(x, y, '.');
+        if (isMax)
+            return numeric_limits<int>::max();
+        else
+            return numeric_limits<int>::min();
+    }
+
+    return 0;
 }
