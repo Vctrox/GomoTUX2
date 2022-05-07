@@ -1,5 +1,4 @@
 #include "Board.hpp"
-#include <cwchar>
 
 using namespace std;
 

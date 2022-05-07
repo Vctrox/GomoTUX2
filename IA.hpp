@@ -1,6 +1,7 @@
 #include <iostream>
 #include <unordered_map>
 #include <vector>
+#include <regex>
 
 #include "Board.hpp"
 
@@ -13,6 +14,9 @@ private:
 
 public:
     int evaluation(Board &board, bool isMax);
+
+    int searchPattern(Board &board, string pattern);
+
     int minimaxAlphaBeta(Board &board, int depth, bool isMax, int alpha, int beta, int x, int y);
     void addToHashTable(Board &board, int eval);
     bool checkHashTable(Board &board);
