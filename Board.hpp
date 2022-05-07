@@ -31,6 +31,9 @@ public:
     char getValue(int x, int y);
     int getMovesCount();
     string getBoard();
+    char getComputerSymbol() { return COMPUTER_SYMBOL; };
+    char getPlayerSymbol() { return PLAYER_SYMBOL; };
+    char getEmptySymbol() { return EMPTY_SYMBOL; };
 };
 
 #endif

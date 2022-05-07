@@ -5,6 +5,7 @@
 #include <unordered_map>
 #include <vector>
 #include <fstream>
+#include <limits>
 
 #include "Board.hpp"
 
@@ -28,6 +29,7 @@ public:
     int minimaxAlphaBeta(Board & board, int depth, bool isMax, int alpha, int beta, int x, int y);
     void addToHashTable(Board & board, int eval);
     bool checkHashTable(Board & board);
+    int getHashEval(string hash);
 };
 
 #endif
