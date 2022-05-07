@@ -31,8 +31,8 @@ int IA::countPattern(Board &board, string pattern)
     int count = 0;
     string boardString = board.getBoard();
     // count += countPatternRow(boardString, pattern);
-    count += countPatternColumn(boardString, pattern);
-    // count += countPatternFirstDiag(boardString, pattern);
+    // count += countPatternColumn(boardString, pattern);
+    count += countPatternFirstDiag(boardString, pattern);
     // count += countPatternSecondDiag(boardString, pattern);
     return count;
 }
@@ -55,8 +55,6 @@ int IA::countPatternRow(const string board, string pattern)
 
 int IA::countPatternColumn(const string board, string pattern)
 {   
-    //TO FINISH
-    
     int count = 0;
     int space = 14;
     string verticalPattern = "(?=(";
@@ -78,11 +76,23 @@ int IA::countPatternColumn(const string board, string pattern)
 
 int IA::countPatternFirstDiag(const string board, string pattern)
 {
-    //TODO
+    //TODO : pas compris entre N - patternLength % N
     int count = 0;
     int space = 15;
-    regex const reg(pattern);
-    
+    string verticalPattern = "(?=(";
+    for (int i = 0 ; i < pattern.length() ; i++)
+    {
+        verticalPattern += pattern[i];
+        if (i+1 != pattern.length()){verticalPattern += ".{" + to_string(space) +"}";}
+    }
+    verticalPattern += ")+)";
+
+    regex const reg(verticalPattern);
+
+    count += ptrdiff_t(distance(
+        sregex_iterator(board.begin(), board.end(), reg),
+        sregex_iterator())
+    );
     return count;
 }
 
@@ -91,7 +101,20 @@ int IA::countPatternSecondDiag(const string board, string pattern)
     //TODO
     int count = 0;
     int space = 13;
-    regex const reg(pattern);
+    string verticalPattern = "(?=(";
+    for (int i = 0 ; i < pattern.length() ; i++)
+    {
+        verticalPattern += pattern[i];
+        if (i+1 != pattern.length()){verticalPattern += ".{" + to_string(space) +"}";}
+    }
+    verticalPattern += ")+)";
+
+    regex const reg(verticalPattern);
+
+    count += ptrdiff_t(distance(
+        sregex_iterator(board.begin(), board.end(), reg),
+        sregex_iterator())
+    );
 
     return count;
 }
