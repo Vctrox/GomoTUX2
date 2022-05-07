@@ -59,14 +59,16 @@ int IA::countPatternColumn(const string board, string pattern)
     //TO FINISH
     
     int count = 0;
-    int space = 14 - pattern.length();
-    string verticalPattern = "";
-    // for (int i = 0 ; i < pattern.length() ; i++)
-    // {
-    //     verticalPattern += (pattern[i] == '.' ? "\\." : pattern[i]);
-    // }
+    int space = 14;
+    string verticalPattern = "(?=(";
+    for (int i = 0 ; i < pattern.length() ; i++)
+    {
+        verticalPattern += pattern[i];
+        if (i+1 != pattern.length()){verticalPattern += ".{" + to_string(space) +"}";}
+    }
+    verticalPattern += ")+)";
 
-    regex const reg("(" + pattern + ").{"+ to_string(space) +"}");
+    regex const reg(verticalPattern);
 
     count += ptrdiff_t(distance(
         sregex_iterator(board.begin(), board.end(), reg),
@@ -79,7 +81,7 @@ int IA::countPatternFirstDiag(const string board, string pattern)
 {
     //TODO
     int count = 0;
-    int space = 15 - pattern.length();
+    int space = 15;
     regex const reg(pattern);
     
     return count;
@@ -89,7 +91,7 @@ int IA::countPatternSecondDiag(const string board, string pattern)
 {
     //TODO
     int count = 0;
-    int space = 13 - pattern.length();
+    int space = 13;
     regex const reg(pattern);
 
     return count;
