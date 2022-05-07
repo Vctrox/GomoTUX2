@@ -31,14 +31,20 @@ int IA::countPattern(Board &board, string pattern)
 {
     int count = 0;
     string boardString = board.getBoard();
-    // count += countPatternRow(boardString, pattern);
-    // count += countPatternColumn(boardString, pattern);
-    count += countPatternFirstDiag(boardString, pattern);
-    // count += countPatternSecondDiag(boardString, pattern);
+
+    int pattern;
+    int space = N;
+    count += countPatternRow(boardString, pattern, space);
+    space = 14;
+    count += countPatternColumn(boardString, pattern, space);
+    space = 15;
+    count += countPatternFirstDiag(boardString, pattern, space);
+    space = 13;
+    count += countPatternSecondDiag(boardString, pattern, space);
     return count;
 }
 
-int IA::countPatternRow(const string board, string pattern)
+int IA::countPatternRow(const string board, string pattern, int space)
 {
     int count = 0;
     regex const reg(pattern);
@@ -54,10 +60,11 @@ int IA::countPatternRow(const string board, string pattern)
     return count;
 }
 
-int IA::countPatternColumn(const string board, string pattern)
+int IA::countPatternColumn(const string board, string pattern, int space)
 {   
     int count = 0;
-    int space = 14;
+
+    // Pattern creation
     string verticalPattern = "(?=(";
     for (int i = 0 ; i < pattern.length() ; i++)
     {
@@ -75,47 +82,56 @@ int IA::countPatternColumn(const string board, string pattern)
     return count;
 }
 
-int IA::countPatternFirstDiag(const string board, string pattern)
+int IA::countPatternFirstDiag(const string board, string pattern, int space)
 {
-    //TODO : pas compris entre N - patternLength % N
     int count = 0;
-    int space = 15;
-    string verticalPattern = "(?=(";
+    int posMax = N - pattern.length();
+
+    // Pattern creation
+    string diagPattern = "(?=(";
     for (int i = 0 ; i < pattern.length() ; i++)
     {
-        verticalPattern += pattern[i];
-        if (i+1 != pattern.length()){verticalPattern += ".{" + to_string(space) +"}";}
+        diagPattern += pattern[i];
+        if (i+1 != pattern.length()){diagPattern += ".{" + to_string(space) +"}";}
     }
-    verticalPattern += ")+)";
+    diagPattern += ")+)";
 
-    regex const reg(verticalPattern);
+    smatch match;
+    regex const reg(diagPattern);
+    regex_search(board,match,reg);
 
-    count += ptrdiff_t(distance(
-        sregex_iterator(board.begin(), board.end(), reg),
-        sregex_iterator())
-    );
+    for (int i = 1 ; i < match.size(); i++)
+    {
+        int pos = match.position(i);
+        if (pos % N < posMax) {count++;}
+    }
+
     return count;
 }
 
-int IA::countPatternSecondDiag(const string board, string pattern)
+int IA::countPatternSecondDiag(const string board, string pattern, int space)
 {
-    //TODO
     int count = 0;
-    int space = 13;
-    string verticalPattern = "(?=(";
+    int posMin = pattern.length();
+
+    // Pattern creation
+    string diagPattern = "(?=(";
     for (int i = 0 ; i < pattern.length() ; i++)
     {
-        verticalPattern += pattern[i];
-        if (i+1 != pattern.length()){verticalPattern += ".{" + to_string(space) +"}";}
+        diagPattern += pattern[i];
+        if (i+1 != pattern.length()){diagPattern += ".{" + to_string(space) +"}";}
     }
-    verticalPattern += ")+)";
+    diagPattern += ")+)";
 
-    regex const reg(verticalPattern);
+    smatch match;
+    regex const reg(diagPattern);
+    regex_search(board,match,reg);
 
-    count += ptrdiff_t(distance(
-        sregex_iterator(board.begin(), board.end(), reg),
-        sregex_iterator())
-    );
+    for (int i = 1 ; i < match.size(); i++)
+    {
+        int pos = match.position(i);
+        if (pos % N > posMin) {count++;}
+    }
 
     return count;
 }
