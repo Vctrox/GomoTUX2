@@ -39,11 +39,11 @@ int IA::countPattern(Board &board, string pattern)
 
     int space = N;
     count += countPatternRow(boardString, pattern, space);
-    space = 14;
+    space = N-1;
     count += countPatternColumn(boardString, pattern, space);
-    space = 15;
+    space = N;
     count += countPatternFirstDiag(boardString, pattern, space);
-    space = 13;
+    space = N-2;
     count += countPatternSecondDiag(boardString, pattern, space);
     return count;
 }
