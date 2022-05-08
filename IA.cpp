@@ -25,7 +25,11 @@ IA::IA(const string patternFileName) {
 
 int IA::evaluation(Board &board, bool isMax)
 {
-    return 0;
+    int score=0;
+    for(int i=0;i<patterns.size();i++){
+        score+=countPattern(board,patterns[i])*patternScores[i];
+    }
+    return score;
 }
 
 int IA::countPattern(Board &board, string pattern)
@@ -193,5 +197,9 @@ int IA::minimaxAlphaBeta(Board &board, int depth, bool isMax, int alpha, int bet
     }
 
     return 0;
+}
+
+void addToHashTable(Board & board, int eval){
+    
 }
 
