@@ -11,8 +11,8 @@
 
 using namespace std;
 
-const int INT_MAX = numeric_limits<int>::max();
-const int INT_MIN = numeric_limits<int>::min();
+const int MAX_INT = numeric_limits<int>::max();
+const int MIN_INT = numeric_limits<int>::min();
 
 class IA
 {

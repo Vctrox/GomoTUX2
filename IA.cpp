@@ -38,8 +38,8 @@ int IA::countPattern(Board &board, string pattern)
     int count = 0;
     string boardString = board.getBoard();
 
-    count += countPatternRow(boardString, pattern);
-    count += countPatternColumn(boardString, pattern);
+    // count += countPatternRow(boardString, pattern);
+    // count += countPatternColumn(boardString, pattern);
     count += countPatternFirstDiag(boardString, pattern);
     count += countPatternSecondDiag(boardString, pattern);
     return count;
@@ -146,9 +146,9 @@ int IA::minimaxAlphaBeta(Board &board, int depth, bool isMax, int alpha, int bet
     if (board.winMove(x, y)) {
         board.setValue(x, y, EMPTY_SYMBOL);
         if (isMax)
-            return INT_MAX;
+            return MAX_INT;
         else
-            return INT_MIN;
+            return MIN_INT;
     } else if (board.draw()) {
         board.setValue(x, y, EMPTY_SYMBOL);
         return 0;
@@ -182,7 +182,7 @@ int IA::minimaxAlphaBeta(Board &board, int depth, bool isMax, int alpha, int bet
 
     int len = (int) xs.size();
     if (isMax) { // Il faut minimiser parceque c'est le tour du joueur
-        int m = INT_MAX;
+        int m = MAX_INT;
         for (int i = 0; i < len; i++) {
             int tmp = minimaxAlphaBeta(board, depth - 1, false, alpha, beta, xs[i], ys[i]);
             if (m > tmp)
@@ -196,7 +196,7 @@ int IA::minimaxAlphaBeta(Board &board, int depth, bool isMax, int alpha, int bet
 
         return m;
     } else { // Il faut maximiser
-        int M = INT_MIN;
+        int M = MIN_INT;
         for (int i = 0; i < len; i++) {
             int tmp = minimaxAlphaBeta(board, depth, isMax, alpha, beta, x, y);
             if (M < tmp)
