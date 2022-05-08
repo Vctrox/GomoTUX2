@@ -105,6 +105,34 @@ bool Board::draw()
     return movesCount == N * N;
 }
 
+bool Board::adjacent(int x, int y) 
+{
+    int isAdj = false;
+
+    if (board[x][y] != EMPTY_SYMBOL)
+        return false;
+
+    int adj[8][2] {
+        {1, 1}, 
+        {0, 1},
+        {-1, 1},
+        {-1, 0},
+        {-1, -1},
+        {0, -1},
+        {1, 1}, 
+    };
+
+    for (auto a:adj) {
+        if (x+a[0] >= 0 && x+a[0] < N && y+a[1] >= 0 && y+a[1] < N) {
+            if (isAdj) break;
+            isAdj = board[x+a[0]][y+a[1]] != EMPTY_SYMBOL;
+        }
+    }
+
+    return isAdj;
+
+}
+
 char Board::getValue(int x, int y)
 {
     return board[x][y];

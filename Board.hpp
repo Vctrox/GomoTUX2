@@ -28,6 +28,7 @@ public:
     bool secondDiagWinMove(int x, int y);
     bool winMove(int x, int y);
     bool draw();
+    bool adjacent(int x, int y);
     char getValue(int x, int y);
     int getMovesCount();
     string getBoard();
