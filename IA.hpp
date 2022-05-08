@@ -30,6 +30,7 @@ public:
     int countPatternFirstDiag(const string board, string pattern, int spaces = 15);
     int countPatternSecondDiag(const string board, string pattern, int space = 13);
     int minimaxAlphaBeta(Board & board, int depth, bool isMax, int alpha, int beta, int x, int y);
+    vector<int> nextMove(Board & board);
     void addToHashTable(Board & board, int eval);
     bool checkHashTable(Board & board);
     int getHashEval(Board & board);
