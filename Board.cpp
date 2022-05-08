@@ -39,6 +39,28 @@ void Board::display()
     cout << endl;
 }
 
+void Board::display2()
+{
+    cout << "   ";
+    for (int i = 0; i < N; i++)
+    {
+        string s = i < 10 ? "  " : " ";
+        cout << i << s;
+    }
+    cout << endl;
+    for (int i = 0; i < N; i++)
+    {
+        cout << ALPHABET[i] << "  ";
+        for (int j = 0; j < N; j++)
+        {
+            cout << board[i][j] << "  ";
+        }
+        // cout <<i;
+        cout << endl;
+    }
+    cout << endl;
+}
+
 bool Board::checkEmpty(int x, int y)
 {
     if (x >= 0 && x < N && y >= 0 && y < N && board[x][y] == EMPTY_SYMBOL)
