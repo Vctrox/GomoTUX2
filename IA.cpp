@@ -38,18 +38,14 @@ int IA::countPattern(Board &board, string pattern)
     int count = 0;
     string boardString = board.getBoard();
 
-    int space = N;
-    count += countPatternRow(boardString, pattern, space);
-    space = N-1;
-    count += countPatternColumn(boardString, pattern, space);
-    space = N;
-    count += countPatternFirstDiag(boardString, pattern, space);
-    space = N-2;
-    count += countPatternSecondDiag(boardString, pattern, space);
+    // count += countPatternRow(boardString, pattern);
+    // count += countPatternColumn(boardString, pattern);
+    count += countPatternFirstDiag(boardString, pattern);
+    count += countPatternSecondDiag(boardString, pattern);
     return count;
 }
 
-int IA::countPatternRow(const string board, string pattern, int space)
+int IA::countPatternRow(const string board, string pattern)
 {
     int count = 0;
     regex const reg(pattern);
@@ -65,7 +61,7 @@ int IA::countPatternRow(const string board, string pattern, int space)
     return count;
 }
 
-int IA::countPatternColumn(const string board, string pattern, int space)
+int IA::countPatternColumn(const string board, string pattern, int spaces)
 {   
     int count = 0;
 
@@ -74,7 +70,7 @@ int IA::countPatternColumn(const string board, string pattern, int space)
     for (int i = 0 ; i < pattern.length() ; i++)
     {
         verticalPattern += pattern[i];
-        if (i+1 != pattern.length()){verticalPattern += ".{" + to_string(space) +"}";}
+        if (i+1 != pattern.length()){verticalPattern += ".{" + to_string(spaces) +"}";}
     }
     verticalPattern += ")+)";
 
@@ -87,7 +83,7 @@ int IA::countPatternColumn(const string board, string pattern, int space)
     return count;
 }
 
-int IA::countPatternFirstDiag(const string board, string pattern, int space)
+int IA::countPatternFirstDiag(const string board, string pattern, int spaces)
 {
     int count = 0;
     int posMax = N - pattern.length();
@@ -97,7 +93,7 @@ int IA::countPatternFirstDiag(const string board, string pattern, int space)
     for (int i = 0 ; i < pattern.length() ; i++)
     {
         diagPattern += pattern[i];
-        if (i+1 != pattern.length()){diagPattern += ".{" + to_string(space) +"}";}
+        if (i+1 != pattern.length()){diagPattern += ".{" + to_string(spaces) +"}";}
     }
     diagPattern += ")+)";
 
@@ -114,7 +110,7 @@ int IA::countPatternFirstDiag(const string board, string pattern, int space)
     return count;
 }
 
-int IA::countPatternSecondDiag(const string board, string pattern, int space)
+int IA::countPatternSecondDiag(const string board, string pattern, int spaces)
 {
     int count = 0;
     int posMin = pattern.length();
@@ -124,7 +120,7 @@ int IA::countPatternSecondDiag(const string board, string pattern, int space)
     for (int i = 0 ; i < pattern.length() ; i++)
     {
         diagPattern += pattern[i];
-        if (i+1 != pattern.length()){diagPattern += ".{" + to_string(space) +"}";}
+        if (i+1 != pattern.length()){diagPattern += ".{" + to_string(spaces) +"}";}
     }
     diagPattern += ")+)";
 
@@ -150,9 +146,9 @@ int IA::minimaxAlphaBeta(Board &board, int depth, bool isMax, int alpha, int bet
     if (board.winMove(x, y)) {
         board.setValue(x, y, EMPTY_SYMBOL);
         if (isMax)
-            return INT_MAX;
+            return MAX_INT;
         else
-            return INT_MIN;
+            return MIN_INT;
     } else if (board.draw()) {
         board.setValue(x, y, EMPTY_SYMBOL);
         return 0;
@@ -161,7 +157,7 @@ int IA::minimaxAlphaBeta(Board &board, int depth, bool isMax, int alpha, int bet
     // Fin de la recursion
     if (depth == 0) {
         int eval = 0;
-        if (checkHashTable(board) == true)
+        if (checkHashTable(board))
             eval = getHashEval(board);
         else {
             eval = evaluation(board, isMax);
@@ -186,7 +182,7 @@ int IA::minimaxAlphaBeta(Board &board, int depth, bool isMax, int alpha, int bet
 
     int len = (int) xs.size();
     if (isMax) { // Il faut minimiser parceque c'est le tour du joueur
-        int m = INT_MAX;
+        int m = MAX_INT;
         for (int i = 0; i < len; i++) {
             int tmp = minimaxAlphaBeta(board, depth - 1, false, alpha, beta, xs[i], ys[i]);
             if (m > tmp)
@@ -200,7 +196,7 @@ int IA::minimaxAlphaBeta(Board &board, int depth, bool isMax, int alpha, int bet
 
         return m;
     } else { // Il faut maximiser
-        int M = INT_MIN;
+        int M = MIN_INT;
         for (int i = 0; i < len; i++) {
             int tmp = minimaxAlphaBeta(board, depth, isMax, alpha, beta, x, y);
             if (M < tmp)
@@ -220,15 +216,14 @@ int IA::minimaxAlphaBeta(Board &board, int depth, bool isMax, int alpha, int bet
 }
 
 void IA::addToHashTable(Board & board, int eval){
-    string board_s=board.getBoard();
+    string board_s = board.getBoard();
     hashTable.insert({board_s,eval});
 }
 
 bool IA::checkHashTable(Board &board){
-    string board_s=board.getBoard();
-    if(hashTable.find(board_s)==hashTable.end()){
+    string board_s = board.getBoard();
+    if(hashTable.find(board_s) == hashTable.end())
         return false;
-    }
     return true;
 }
 

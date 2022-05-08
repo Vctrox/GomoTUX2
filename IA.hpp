@@ -11,8 +11,8 @@
 
 using namespace std;
 
-const int INT_MAX = numeric_limits<int>::max();
-const int INT_MIN = numeric_limits<int>::min();
+const int MAX_INT = numeric_limits<int>::max();
+const int MIN_INT = numeric_limits<int>::min();
 
 class IA
 {
@@ -25,10 +25,10 @@ public:
     IA(const string patternFile);
     int evaluation(Board & board, bool isMax);
     int countPattern(Board & board, string pattern);
-    int countPatternRow(const string board, string pattern, int space);
-    int countPatternColumn(const string board, string pattern, int space);
-    int countPatternFirstDiag(const string board, string pattern, int space);
-    int countPatternSecondDiag(const string board, string pattern, int space);
+    int countPatternRow(const string board, string pattern);
+    int countPatternColumn(const string board, string pattern, int spaces = 14);
+    int countPatternFirstDiag(const string board, string pattern, int spaces = 15);
+    int countPatternSecondDiag(const string board, string pattern, int space = 13);
     int minimaxAlphaBeta(Board & board, int depth, bool isMax, int alpha, int beta, int x, int y);
     void addToHashTable(Board & board, int eval);
     bool checkHashTable(Board & board);
