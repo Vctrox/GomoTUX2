@@ -40,11 +40,11 @@ int IA::countPattern(Board &board, string pattern)
 
     int space = N;
     count += countPatternRow(boardString, pattern, space);
-    space = 14;
+    space = N-1;
     count += countPatternColumn(boardString, pattern, space);
-    space = 15;
+    space = N;
     count += countPatternFirstDiag(boardString, pattern, space);
-    space = 13;
+    space = N-2;
     count += countPatternSecondDiag(boardString, pattern, space);
     return count;
 }
@@ -219,7 +219,20 @@ int IA::minimaxAlphaBeta(Board &board, int depth, bool isMax, int alpha, int bet
     return 0;
 }
 
-void addToHashTable(Board & board, int eval){
-    
+void IA::addToHashTable(Board & board, int eval){
+    string board_s=board.getBoard();
+    hashTable.insert({board_s,eval});
 }
 
+bool IA::checkHashTable(Board &board){
+    string board_s=board.getBoard();
+    if(hashTable.find(board_s)==hashTable.end()){
+        return false;
+    }
+    return true;
+}
+
+int IA::getHashEval(Board &board){
+    string board_s=board.getBoard();
+    return hashTable[board_s];
+}
