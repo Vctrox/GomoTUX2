@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Board.hpp"
 #include "IA.hpp"
+#include <vector>
 
 class Game
 {
@@ -12,7 +13,7 @@ class Game
         IA * brain;
     public:
         Game(const string patternFile);
-        void play();
+        bool play(int x, int y);
         void run();
 };
 
