@@ -52,10 +52,9 @@ void Game::run()
     //commencer
 
     //corespondance alphabet - number
-    char alphabet[26]={'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
     unordered_map<char, int> correspondance;
     for(int i=0;i<N;i++){
-        correspondance.insert({alphabet[i],i});
+        correspondance.insert({ALPHABET[i],i});
     }
 
     bool finish=true;
