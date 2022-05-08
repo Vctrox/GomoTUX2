@@ -11,6 +11,9 @@
 
 using namespace std;
 
+const int INT_MAX = numeric_limits<int>::max();
+const int INT_MIN = numeric_limits<int>::min();
+
 class IA
 {
 private:
@@ -29,7 +32,7 @@ public:
     int minimaxAlphaBeta(Board & board, int depth, bool isMax, int alpha, int beta, int x, int y);
     void addToHashTable(Board & board, int eval);
     bool checkHashTable(Board & board);
-    int getHashEval(string hash);
+    int getHashEval(Board & board);
 };
 
 #endif

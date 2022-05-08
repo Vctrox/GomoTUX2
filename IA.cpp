@@ -1,4 +1,5 @@
 #include "IA.hpp"
+#include "Board.hpp"
 #include <array>
 #include <cstddef>
 #include <limits>
@@ -141,60 +142,79 @@ int IA::countPatternSecondDiag(const string board, string pattern, int space)
 }
 
 int IA::minimaxAlphaBeta(Board &board, int depth, bool isMax, int alpha, int beta, int x, int y) {
-    char c = isMax ? board.getComputerSymbol() : board.getPlayerSymbol();
+    char c = isMax ? COMPUTER_SYMBOL : PLAYER_SYMBOL;
     
     board.setValue(x, y, c);
 
+    // Fin du jeu
     if (board.winMove(x, y)) {
-        board.setValue(x, y, '.');
+        board.setValue(x, y, EMPTY_SYMBOL);
         if (isMax)
-            return numeric_limits<int>::max();
+            return INT_MAX;
         else
-            return numeric_limits<int>::min();
+            return INT_MIN;
+    } else if (board.draw()) {
+        board.setValue(x, y, EMPTY_SYMBOL);
+        return 0;
     }
 
-    if(depth==0){
-        int eval=evaluation(board, isMax);
-        //std::size_t coup = std::hash<>{}(board)
+    // Fin de la recursion
+    if (depth == 0) {
+        int eval = 0;
+        if (checkHashTable(board) == true)
+            eval = getHashEval(board);
+        else {
+            eval = evaluation(board, isMax);
+            addToHashTable(board, eval);
+        }
+        board.setValue(x, y, EMPTY_SYMBOL);
+
         return eval;
     }
 
-    if(isMax){
-        int maxEval=numeric_limits<int>::max();
-        int eval;
-        for(int i=0;i<N;i++){
-            for(int j=0;j<N;j++){
-                if(board.checkEmpty(i, j)){
-                    eval=minimaxAlphaBeta(board, depth-1, isMax, alpha, beta, i, j);
-                    maxEval=max(maxEval,eval);
-                    alpha= max(alpha,eval);
-                    if(beta<=alpha){
-                        break;
-                    }
-
-                }
+    // les prochains coup possible (x et y)
+    vector<int> xs;
+    vector<int> ys;
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            if (board.adjacent(x, y)) {
+                xs.push_back(x);
+                ys.push_back(y);
             }
         }
-        return maxEval;
     }
-    else{
-        int minEval= numeric_limits<int>::min();
-        int eval;
-        for(int i=0;i<N;i++){
-            for(int j=0;j<N;j++){
-                if(board.checkEmpty(i, j)){
-                    eval=minimaxAlphaBeta(board, depth-1, isMax, alpha, beta, i, j);
-                    minEval= min(beta,eval);
-                    beta= max(beta,eval);
-                    if(beta<=alpha){
-                        break;
-                    }
 
-                }
-            }
+    int len = (int) xs.size();
+    if (isMax) { // Il faut minimiser parceque c'est le tour du joueur
+        int m = INT_MAX;
+        for (int i = 0; i < len; i++) {
+            int tmp = minimaxAlphaBeta(board, depth - 1, false, alpha, beta, xs[i], ys[i]);
+            if (m > tmp)
+                m = tmp;
+            if (beta > m)
+                beta = m;
+            if (alpha >= beta)
+                break;
         }
-        return minEval;
+        board.setValue(x, y, EMPTY_SYMBOL);
+
+        return m;
+    } else { // Il faut maximiser
+        int M = INT_MIN;
+        for (int i = 0; i < len; i++) {
+            int tmp = minimaxAlphaBeta(board, depth, isMax, alpha, beta, x, y);
+            if (M < tmp)
+                M = tmp;
+            if (alpha < M)
+                alpha = M;
+            if (alpha >= beta)
+                break;
+        }
+        board.setValue(x, y, EMPTY_SYMBOL);
+
+        return M;
     }
+
 
     return 0;
 }
