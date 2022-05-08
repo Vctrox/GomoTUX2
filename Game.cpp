@@ -1,9 +1,6 @@
 #include "Game.hpp"
 
-Game::Game()
-{
-    
-}
+Game::Game(){}
 
 void Game::run()
 {
@@ -59,21 +56,33 @@ void Game::run()
     bool finish = true;
     
     bool firstRound = true;
+    int x;
+    int y;
     while (finish) {
-        board.display();
+        board.display2();
         if(player){
             cout << "#PLAYER'S TURN" << endl;
             char l;
-            int x = -1;
-            int y = -1;
-            while (!board.checkEmpty(x,y)) {
-                cout << "Coordinate of the desire move\nLine (A to O) : ";
-                cin >> l;
-                if(correspondance.find(l) != correspondance.end()){
-                    x = correspondance[l];
+            
+            while (!board.checkEmpty(x,y-1)) {
+                cout << "#INPUT" << endl;
+                // check x
+                x = -1;
+                y = -1;
+                while (x < 0 || x > N - 1){
+                    cout << "Coordinate of the desire move\nLine (A to O) : ";
+                    cin >> l;
+                    if(correspondance.find(l) != correspondance.end()){
+                        x = correspondance[l];
+                    }
                 }
-                cout << "Column (1 to 15): ";
-                cin >> y;
+                // check y
+                while (y < 1 || y > N){
+                    cout << "Column (1 to 15): ";
+                    cin >> y;
+                }
+                cout << "#CHECKING VALIDITY" << endl;
+
             }
             board.setValue(x, y-1, PLAYER_SYMBOL);
             if(board.winMove(x, y-1)){
@@ -95,8 +104,8 @@ void Game::run()
                 }
             } else {
                 cout << "ERROR : decided to place in an not empty place" << endl;
+                break;
             }
-           
         }
         player = !player;
     }

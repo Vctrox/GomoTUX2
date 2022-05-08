@@ -22,7 +22,7 @@ IA::IA(const string patternFileName) {
             patterns.push_back(pattern);
             patternScores.push_back(score);
         }
-    }    
+    } 
 }
 
 int IA::evaluation(Board &board, bool isMax)
@@ -226,7 +226,7 @@ vector<int> IA::nextMove(Board &board)
 
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
-            if (board.adjacent(x, y)) {
+            if (board.adjacent(i, j)) {
                 int tmp = minimaxAlphaBeta(board, 5, true, MIN_INT, MAX_INT, i, j);
                 if (M < tmp) {
                     M = tmp;
