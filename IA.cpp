@@ -39,8 +39,8 @@ int IA::countPattern(Board &board, string pattern)
     int count = 0;
     string boardString = board.getBoard();
 
-    // count += countPatternRow(boardString, pattern);
-    // count += countPatternColumn(boardString, pattern);
+    count += countPatternRow(boardString, pattern);
+    count += countPatternColumn(boardString, pattern);
     count += countPatternFirstDiag(boardString, pattern);
     count += countPatternSecondDiag(boardString, pattern);
     return count;
@@ -87,25 +87,26 @@ int IA::countPatternColumn(const string board, string pattern, int spaces)
 int IA::countPatternFirstDiag(const string board, string pattern, int spaces)
 {
     int count = 0;
-    int posMax = N - pattern.length();
+    int length = pattern.length();
+    int posMax = N - length;
 
     // Pattern creation
     string diagPattern = "(?=(";
-    for (int i = 0 ; i < pattern.length() ; i++)
+    for (int i = 0 ; i < length ; i++)
     {
         diagPattern += pattern[i];
-        if (i+1 != pattern.length()){diagPattern += ".{" + to_string(spaces) +"}";}
+        if (i+1 != length){diagPattern += ".{" + to_string(spaces) +"}";}
     }
     diagPattern += ")+)";
 
-    smatch match;
     regex const reg(diagPattern);
-    regex_search(board,match,reg);
-
-    for (int i = 1 ; i < match.size(); i++)
+    for(sregex_iterator i = sregex_iterator(board.begin(), board.end(), reg);
+                            i != sregex_iterator();
+                            ++i )
     {
-        int pos = match.position(i);
-        if (pos % N < posMax) {count++;}
+        smatch m = *i;
+        int pos = m.position();
+        if ((pos % N < posMax) && (pos/N < N - length/2) ){count++;}
     }
 
     return count;
@@ -114,25 +115,26 @@ int IA::countPatternFirstDiag(const string board, string pattern, int spaces)
 int IA::countPatternSecondDiag(const string board, string pattern, int spaces)
 {
     int count = 0;
-    int posMin = pattern.length();
+    int length = pattern.length();
+    int posMin = length;
 
     // Pattern creation
     string diagPattern = "(?=(";
-    for (int i = 0 ; i < pattern.length() ; i++)
+    for (int i = 0 ; i < length ; i++)
     {
         diagPattern += pattern[i];
-        if (i+1 != pattern.length()){diagPattern += ".{" + to_string(spaces) +"}";}
+        if (i+1 != length){diagPattern += ".{" + to_string(spaces) +"}";}
     }
     diagPattern += ")+)";
 
-    smatch match;
     regex const reg(diagPattern);
-    regex_search(board,match,reg);
-
-    for (int i = 1 ; i < match.size(); i++)
+    for(sregex_iterator i = sregex_iterator(board.begin(), board.end(), reg);
+                            i != sregex_iterator();
+                            ++i )
     {
-        int pos = match.position(i);
-        if (pos % N > posMin) {count++;}
+        smatch m = *i;
+        int pos = m.position();
+        if ((pos % N > posMin) && (pos/N < N - length/2) ){count++;}
     }
 
     return count;
