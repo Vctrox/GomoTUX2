@@ -22,7 +22,7 @@ private:
     vector<int> patternScores;
 
 public:
-    IA(const string patternFile);
+    IA(const string patternFile = "patterns.csv");
     int evaluation(Board & board, bool isMax);
     int countPattern(Board & board, string pattern);
     int countPatternRow(const string board, string pattern);

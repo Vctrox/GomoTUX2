@@ -1,12 +1,8 @@
 #include "Game.hpp"
-#include "Board.hpp"
-#include <iostream>
-#include <unordered_map>
 
-Game::Game(const string patternFile)
+Game::Game()
 {
-    board = new Board();
-    brain = new IA(patternFile);
+    
 }
 
 void Game::run()
@@ -15,41 +11,43 @@ void Game::run()
     cout << "Welcome" << endl;
     cout << "would you like to play? Y/n :";
     char awnser;
-    do{
-    cin >> awnser;
-    cout << endl;
-    if(awnser=='n'){
-        cout << "Good by beautie" <<endl;
-        return;
+    
+    while(awnser!='Y' && awnser!='n'){
+        cin >> awnser;
+        cout << endl;
+        if(awnser=='n'){
+            cout << "Good by beautie" <<endl;
+            return;
+        }
+        else if(awnser == 'Y'){
+            cout << "Welcome to the best game ever made" << endl;
+        }
+        else{
+            cout << "another one: ";
+        }
     }
-    else if(awnser == 'Y'){
-        cout << "Welcome to the best game ever made" << endl;
-        break;
-    }
-    else{
-        cout << "another one: ";
-    }
-    }while(awnser!='Y' or awnser!='n');
 
     //jouer en ou en 2
     int role;
     cout << "Would you like to play first or second? 1/2: ";
-    do
+    
+    while(role!=1 && role!= 2)
     {
-    cin >> role;
-    if(role==1 or role==2){
-        cout << "okay you are going to play: " << role << endl;
-        break;
+        cin >> role;
+        
+        if(role==1 || role==2){
+            cout << "okay you are going to play " << (role==1? "first" : "second") << endl;
+        }
+        else{
+            cout << "another one: ";
+        }
     }
-    else{
-        cout << "another one: ";
-    }
-    }while(role!=1 or role!= 2);
+    cout<< "yes";
 
     bool player;
-    role==1 ? player=true:player=false; 
+    player=(role==1 ? true:false); 
     
-    //commencer
+    //start
 
     //corespondance alphabet - number
     unordered_map<char, int> correspondance;
@@ -59,27 +57,39 @@ void Game::run()
 
     bool finish=true;
     while (finish) {
-        board->display();
+        //board.display();
         if(player){
             char l;
-            int x;
-            int y;
-            while(x>15 && x<0 && y>15 && y<0 && board->checkEmpty(x, y)){
+            int x=-1;
+            int y=-1;
+            while(x>15 && x<0 && y>15 && y<0 && board.checkEmpty(x, y)){
                 cout << "Coordonate of the desire move\n x: ";
                 cin >> l;
+                if(correspondance.find(l)!=correspondance.end()){
+                    x=correspondance[l];
+                }
                 cout << "y: ";
                 cin >> y;
                 player=(player ? false :true);
             }
+            if(board.winMove(x, y)){
+                cout << "Great Great you win against the amazing me\nCome try again";
+                finish=false;
+            }
         }
         else{
-            vector<int> nextMove = nextMove(board);
+            vector<int> nextMove = brain.nextMove(board);
             int lig=nextMove[0];
             int col=nextMove[1];
-            if(board->checkEmpty(lig, col)){
-                board->setValue(lig, col, COMPUTER_SYMBOL);
+            if(board.checkEmpty(lig, col)){
+                if(board.winMove(lig, col)){
+                    cout << "sorry computer better than you AHAHAHA\nCome try again noob"<< endl;
+                    finish=false;
+                }
+                board.setValue(lig, col, COMPUTER_SYMBOL);
             }
             player=(player ? false :true);
+            cout<< "else";
         }
     }
 }

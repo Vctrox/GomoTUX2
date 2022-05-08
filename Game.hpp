@@ -5,14 +5,15 @@
 #include "Board.hpp"
 #include "IA.hpp"
 #include <vector>
+#include <unordered_map>
 
 class Game
 {
     private:
-        Board * board;
-        IA * brain;
+        Board board;
+        IA brain;
     public:
-        Game(const string patternFile);
+        Game();
         bool play(int x, int y);
         void run();
 };
