@@ -9,7 +9,7 @@ Board::Board()
             board[i][j] = EMPTY_SYMBOL;
     movesCount = 0;
 }
-
+ 
 void Board::display()
 {
     cout << "   ";

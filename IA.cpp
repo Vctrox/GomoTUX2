@@ -1,5 +1,6 @@
 #include "IA.hpp"
 #include <array>
+#include <cstddef>
 #include <limits>
 #include <string>
 #include <sstream>
@@ -32,7 +33,6 @@ int IA::countPattern(Board &board, string pattern)
     int count = 0;
     string boardString = board.getBoard();
 
-    int pattern;
     int space = N;
     count += countPatternRow(boardString, pattern, space);
     space = 14;
@@ -149,5 +149,49 @@ int IA::minimaxAlphaBeta(Board &board, int depth, bool isMax, int alpha, int bet
             return numeric_limits<int>::min();
     }
 
+    if(depth==0){
+        int eval=evaluation(board, isMax);
+        //std::size_t coup = std::hash<>{}(board)
+        return eval;
+    }
+
+    if(isMax){
+        int maxEval=numeric_limits<int>::max();
+        int eval;
+        for(int i=0;i<N;i++){
+            for(int j=0;j<N;j++){
+                if(board.checkEmpty(i, j)){
+                    eval=minimaxAlphaBeta(board, depth-1, isMax, alpha, beta, i, j);
+                    maxEval=max(maxEval,eval);
+                    alpha= max(alpha,eval);
+                    if(beta<=alpha){
+                        break;
+                    }
+
+                }
+            }
+        }
+        return maxEval;
+    }
+    else{
+        int minEval= numeric_limits<int>::min();
+        int eval;
+        for(int i=0;i<N;i++){
+            for(int j=0;j<N;j++){
+                if(board.checkEmpty(i, j)){
+                    eval=minimaxAlphaBeta(board, depth-1, isMax, alpha, beta, i, j);
+                    minEval= min(beta,eval);
+                    beta= max(beta,eval);
+                    if(beta<=alpha){
+                        break;
+                    }
+
+                }
+            }
+        }
+        return minEval;
+    }
+
     return 0;
 }
+
