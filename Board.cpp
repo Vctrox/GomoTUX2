@@ -42,8 +42,8 @@ void Board::display()
 void Board::display2()
 {
     cout << "   ";
-    for (int i = 0; i < N; i++)
-    {
+    for (int i = 1; i <= N; i++)
+{
         string s = i < 10 ? "  " : " ";
         cout << i << s;
     }
