@@ -161,7 +161,7 @@ int IA::minimaxAlphaBeta(Board &board, int depth, bool isMax, int alpha, int bet
     // Fin de la recursion
     if (depth == 0) {
         int eval = 0;
-        if (checkHashTable(board) == true)
+        if (checkHashTable(board))
             eval = getHashEval(board);
         else {
             eval = evaluation(board, isMax);
@@ -220,15 +220,14 @@ int IA::minimaxAlphaBeta(Board &board, int depth, bool isMax, int alpha, int bet
 }
 
 void IA::addToHashTable(Board & board, int eval){
-    string board_s=board.getBoard();
+    string board_s = board.getBoard();
     hashTable.insert({board_s,eval});
 }
 
 bool IA::checkHashTable(Board &board){
-    string board_s=board.getBoard();
-    if(hashTable.find(board_s)==hashTable.end()){
+    string board_s = board.getBoard();
+    if(hashTable.find(board_s) == hashTable.end())
         return false;
-    }
     return true;
 }
 
