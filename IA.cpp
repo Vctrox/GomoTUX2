@@ -6,6 +6,7 @@
 #include <string>
 #include <sstream>
 #include <regex>
+#include <vector>
 
 IA::IA(const string patternFileName) {
     ifstream file(patternFileName);
@@ -213,6 +214,30 @@ int IA::minimaxAlphaBeta(Board &board, int depth, bool isMax, int alpha, int bet
 
 
     return 0;
+}
+
+vector<int> IA::nextMove(Board &board) 
+{
+    vector<int> v = {0, 0};
+    int M = MIN_INT;
+    int x = N/2, y = N/2;
+
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            if (board.adjacent(x, y)) {
+                int tmp = minimaxAlphaBeta(board, 5, true, MIN_INT, MAX_INT, i, j);
+                if (M < tmp) {
+                    M = tmp;
+                    x = i;
+                    y = j;
+                }
+            }
+        }
+    }
+    v[0] = x;
+    v[1] = y;
+
+    return v;
 }
 
 void IA::addToHashTable(Board & board, int eval){
