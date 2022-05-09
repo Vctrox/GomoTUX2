@@ -142,23 +142,27 @@ int IA::countPatternSecondDiag(const string board, string pattern, int spaces)
 
 int IA::minimaxAlphaBeta(Board &board, int depth, bool isMax, int alpha, int beta, int x, int y) {
     char c = isMax ? COMPUTER_SYMBOL : PLAYER_SYMBOL;
-    
     board.setValue(x, y, c);
 
     // Fin du jeu
     if (board.winMove(x, y)) {
+        //cout << "cas 1" << endl;
         board.setValue(x, y, EMPTY_SYMBOL);
         if (isMax)
             return MAX_INT;
         else
             return MIN_INT;
     } else if (board.draw()) {
+
+        //cout << "cas L" << endl;
         board.setValue(x, y, EMPTY_SYMBOL);
         return 0;
-    }
+    } 
 
     // Fin de la recursion
     if (depth == 0) {
+        //cout << "x = " << x << " ; y = " << y << endl;
+        //cout << "cas 3" << endl;
         int eval = 0;
         if (checkHashTable(board))
             eval = getHashEval(board);
@@ -176,9 +180,9 @@ int IA::minimaxAlphaBeta(Board &board, int depth, bool isMax, int alpha, int bet
     vector<int> ys;
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
-            if (board.adjacent(x, y)) {
-                xs.push_back(x);
-                ys.push_back(y);
+            if (board.adjacent(i, j)) {
+                xs.push_back(i);
+                ys.push_back(j);
             }
         }
     }
@@ -201,7 +205,7 @@ int IA::minimaxAlphaBeta(Board &board, int depth, bool isMax, int alpha, int bet
     } else { // Il faut maximiser
         int M = MIN_INT;
         for (int i = 0; i < len; i++) {
-            int tmp = minimaxAlphaBeta(board, depth, isMax, alpha, beta, x, y);
+            int tmp = minimaxAlphaBeta(board, depth - 1, true, alpha, beta, x, y);
             if (M < tmp)
                 M = tmp;
             if (alpha < M)
@@ -227,7 +231,7 @@ vector<int> IA::nextMove(Board &board)
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
             if (board.adjacent(i, j)) {
-                int tmp = minimaxAlphaBeta(board, 5, true, MIN_INT, MAX_INT, i, j);
+                int tmp = minimaxAlphaBeta(board, 1, true, MIN_INT, MAX_INT, i, j);
                 if (M < tmp) {
                     M = tmp;
                     x = i;

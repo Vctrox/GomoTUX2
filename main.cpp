@@ -2,6 +2,7 @@
 
 #include "Board.hpp"
 #include "IA.hpp"
+#include "Game.hpp"
 
 int main()
 {
@@ -25,7 +26,7 @@ int main()
     cout << count << endl;
 
     return 0;*/
-
+    /*
     Board board = Board();
     IA cerveau = IA("patterns.csv");
     
@@ -41,6 +42,9 @@ int main()
     cout<<cerveau.getHashEval(board)<<endl;
 
     //board.setValue(1, 1, PLAYER_SYMBOL);
-    cout<<(cerveau.checkHashTable(board)?"trouve":"pas trouve") << endl;
+    cout<<(cerveau.checkHashTable(board)?"trouve":"pas trouve") << endl;*/
+
+    Game game = Game();
+    game.run();
 
 }
