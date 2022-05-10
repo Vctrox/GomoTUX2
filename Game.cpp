@@ -51,13 +51,16 @@ array<int,2> Game::input(unordered_map<char,int> bind)
                 positions[0] = bind[str[0]];
                 positions[1] = y - 1;
             }
-            else{
+            else if (str.size() == 3){
                 int y = (str[1] - '0') * 10 + (str[2] - '0');
                 if (y < 1 || y > N) { 
                     continue;
                 }
                 positions[0] = bind[str[0]];
                 positions[1] = y - 1;
+            } else
+            {
+                continue;
             }
             
         
@@ -110,7 +113,7 @@ void Game::run()
             time_t start = time(nullptr);
             vector<int> nextMove = brain.nextMove(board);
             time_t end = time(nullptr);
-            cout<< "computer calculation time: " << end - start << " second" <<endl;
+            cout<< "computer calculation time: " << end - start << " second" << endl;
             int lig = nextMove[0];
             int col = nextMove[1];
             if (board.checkEmpty(lig,col))
