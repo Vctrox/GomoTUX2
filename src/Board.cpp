@@ -171,6 +171,13 @@ string Board::getBoard()
     string out = "";
     for (int i = 0; i < N; i++)
         for (int j = 0; j < N; j++)
-            out += board[i][j];
+            out += (
+                board[i][j] == COMPUTER_SYMBOL ? 
+                    '1' :
+                    (board[i][j] == PLAYER_SYMBOL ? 
+                        '2' :
+                        '0'
+                    )
+            );
     return out;
 }
