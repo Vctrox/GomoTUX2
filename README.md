@@ -1,5 +1,11 @@
 # GomoTUX2
 
+
+## Dependencies
+
+- CMake
+- C++ compiler
+
 ## How to build
 
 ### Clone the repository
