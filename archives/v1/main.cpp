@@ -1,4 +1,5 @@
 #include <iostream>
+#include <vector>
 
 #include "Board.hpp"
 #include "IA.hpp"
@@ -44,7 +45,30 @@ int main()
     //board.setValue(1, 1, PLAYER_SYMBOL);
     cout<<(cerveau.checkHashTable(board)?"trouve":"pas trouve") << endl;*/
 
-    Game game = Game();
-    game.run();
+    //Game game = Game();
+    //game.run();
+
+    
+    Board board = Board();
+
+    board.setValue(7, 7, PLAYER_SYMBOL);
+    //board.setValue(8, 8, COMPUTER_SYMBOL);
+    //board.setValue(7, 6, PLAYER_SYMBOL);
+    //board.setValue(7, 8, COMPUTER_SYMBOL);
+    //board.setValue(6, 8, PLAYER_SYMBOL);
+    //board.setValue(8, 7, COMPUTER_SYMBOL);
+    //board.setValue(8, 6, PLAYER_SYMBOL);
+    //board.setValue(9, 5, COMPUTER_SYMBOL);
+    //board.setValue(5, 9, PLAYER_SYMBOL);
+
+    IA ia = IA("patterns.csv");
+
+    //cout << ia.evaluation(board, true) << endl;
+
+    vector<int> pos = ia.nextMove(board);
+
+    cout << "next move: "  << pos[0] << " : " << pos[1] << endl;
+
+    board.display();
 
 }
