@@ -7,6 +7,7 @@
 #include <unordered_map>
 #include <tuple>
 #include <array>
+#include <ctime>
 
 class Game
 {

@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "Board.hpp"
 
 Game::Game(){}
 
@@ -35,19 +36,30 @@ array<int,2> Game::input(unordered_map<char,int> bind)
         cout << "Your move (format : XY) : ";
         getline(cin, str);
 
-        if (str.empty() || str.size() != 2) {
+        if (str.empty() || (str.size() != 2 && str.size() != 3)) {
             cout << "Try again : "; 
             continue;
         }
         cout << endl;
 
         if(bind.find(str[0]) != bind.end()){
-            int y = str[1] - '0';
-            if (y < 1 || y > N) { 
-                continue;
+            if(str.size() == 2){
+                int y = str[1] - '0';
+                if (y < 1 || y > N) { 
+                    continue;
+                }
+                positions[0] = bind[str[0]];
+                positions[1] = y - 1;
             }
-            positions[0] = bind[str[0]];
-            positions[1] = y - 1;
+            else{
+                int y = (str[1] - '0') * 10 + (str[2] - '0');
+                if (y < 1 || y > N) { 
+                    continue;
+                }
+                positions[0] = bind[str[0]];
+                positions[1] = y - 1;
+            }
+            
         
         }
     }
@@ -95,13 +107,16 @@ void Game::run()
         }
         else{
             cout << "COMPUTER'S TURN" << endl;
+            time_t start = time(nullptr);
             vector<int> nextMove = brain.nextMove(board);
+            time_t end = time(nullptr);
+            cout<< "computer calculation time: " << end - start << " second" <<endl;
             int lig = nextMove[0];
             int col = nextMove[1];
             if (board.checkEmpty(lig,col))
             {
                 board.setValue(lig, col, COMPUTER_SYMBOL);
-                cout << "Move : " << lig << "," << col << endl;
+                cout << "Move : " << ALPHABET[lig] << "," << col + 1 << endl;
                 if(board.winMove(lig, col)){
                     // cout << "sorry computer better than you AHAHAHA\nCome try again noob" << endl;
                     cout << "WINNER : Computer" << endl;
