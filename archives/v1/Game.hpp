@@ -2,10 +2,12 @@
 #define Game_H
 
 #include <iostream>
-#include "Board.hpp"
 #include "IA.hpp"
 #include <vector>
 #include <unordered_map>
+#include <tuple>
+#include <array>
+#include <ctime>
 
 class Game
 {
@@ -15,6 +17,9 @@ class Game
     public:
         Game();
         bool play(int x, int y);
+        array<int,2> input(unordered_map<char, int> translate);
+        unordered_map<char,int> getBinds();
+        int whoFirst();
         void run();
 };
 
