@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.0)
 project(GomoTux3)
 
 # includes
-include_directories("headers")
+include_directories("include")
 
 # source files
 file(GLOB_RECURSE SRC "src/*.cpp")
