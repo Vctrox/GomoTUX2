@@ -4,41 +4,19 @@ using namespace std;
 
 Board::Board()
 {
+    board = new board[g_size];
 
     for (int i = 0; i < g_size; i++)
         for (int j = 0; j < g_size; j++)
-            board[i*g_size+j] = EMPTY_SYMBOL;
+            board[i * g_size + j] = EMPTY_SYMBOL;
     movesCount = 0;
 }
  
 void Board::display()
 {
     cout << "   ";
-    for (int i = 0; i < g_size; i++)
-    {
-        string s = i < 10 ? "  " : " ";
-        cout << i << s;
-    }
-    cout << endl;
-    for (int i = 0; i < g_size; i++)
-    {
-        string s = i < 10 ? "  " : " ";
-        cout << i << s;
-        for (int j = 0; j < g_size; j++)
-        {
-            cout << board[i*g_size+j] << "  ";
-        }
-        // cout <<i;
-        cout << endl;
-    }
-    cout << endl;
-}
-
-void Board::display2()
-{
-    cout << "   ";
     for (int i = 1; i <= g_size; i++)
-{
+    {
         string s = i < 10 ? "  " : " ";
         cout << i << s;
     }
@@ -58,14 +36,14 @@ void Board::display2()
 
 bool Board::checkEmpty(int x, int y)
 {
-    if (x >= 0 && x < g_size && y >= 0 && y < N && board[x*N+y] == EMPTY_SYMBOL)
+    if (x >= 0 && x < g_size && y >= 0 && y < g_size && board[x * g_size + y] == EMPTY_SYMBOL)
         return true;
     return false;
 }
 
 void Board::setValue(int x, int y, char c)
 {
-    board[x*g_size+y] = c;
+    board[x * g_size + y] = c;
     if (c == EMPTY_SYMBOL)
         movesCount--;
     else

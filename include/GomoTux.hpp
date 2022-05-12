@@ -2,7 +2,7 @@
 #define GOMOTUX_H
 
 #include <cstring>
-#include "patterns.hpp"
+#include "globals.hpp"
 
 class GomoTux {
     private:
