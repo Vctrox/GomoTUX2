@@ -1,4 +1,4 @@
-#include "patterns.hpp"
+#include "globals.hpp"
 
 char g_pattern[11 * 2][4] = {
     {1, 5,  0,  0}, {0, 0,  0,  0},  // 10000

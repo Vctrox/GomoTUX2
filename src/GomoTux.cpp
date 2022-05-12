@@ -28,5 +28,26 @@ int GomoTux::evaluation(const char* board, char player){
 }
 
 int GomoTux::evaluationMove(const char* board, int r, int c, char player){
-    return 0;
+    int score = 0;
+    int size = taille;
+
+    // Add to score by length on each direction
+    // Find the maximum length in ADM and skip some patterns
+    int max_measured_len = 0;
+    for (int i = 0; i < 4; i++) {
+        int len = patterns[i].length;
+        max_measured_len = len > max_measured_len ? len : max_measured_len;
+        score += len - 1;
+    }
+    int start_pattern = skip[max_measured_len];
+
+    // Loop through and try to match all preset patterns
+    for (int i = start_pattern; i < size; ++i) {
+        score += matchPattern(all_direction_measurement, &preset_patterns[2 * i]) * preset_scores[i];
+
+        // Only match one threatening pattern
+        if (score >= kRenjuAiEvalThreateningScore) break;
+    }
+
+    return score;
 }

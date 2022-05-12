@@ -3,10 +3,10 @@
 
 #include <iostream>
 #include <string>
+#include "globals.hpp"
 
 using namespace std;
 
-const int N = 15;
 const char PLAYER_SYMBOL = 'X';
 const char COMPUTER_SYMBOL = 'O';
 const char EMPTY_SYMBOL = '-';
@@ -15,7 +15,7 @@ const char ALPHABET[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'
 class Board
 {
 private:
-    char board[N*N];
+    char board[g_size * g_size];
     int movesCount;
 
 public:
