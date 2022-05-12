@@ -32,6 +32,16 @@ class GomoTux {
                                  int player,
                                  bool consecutive,
                                  GomoTux::MeasureMove *result);
-            };
+
+            void measureInAllDirections(const char *gs,
+                                       int r,
+                                       int c,
+                                       int player,
+                                       bool consecutive,
+                                       GomoTux::MeasureMove *adm);
+};
+
+            
+
 
 #endif

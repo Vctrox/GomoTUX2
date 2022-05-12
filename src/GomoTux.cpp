@@ -76,3 +76,20 @@ void GomoTux::measureInOneDirection(const char *board,
         }
     }
 }
+
+void GomoTux::measureInAllDirections(const char *board,
+                                       int x,
+                                       int y,
+                                       int player,
+                                       bool consecutive,
+                                       GomoTux::MeasureMove *adm) {
+    // Check arguments
+    if (gs == nullptr) return;
+    if (x < 0 || x >= g_size || y < 0 || y >= g_size) return;
+
+    // Measure 4 directions
+    measureDirection(board, x, y, 0,  1, player, consecutive, &adm[0]);
+    measureDirection(board, x, y, 1,  1, player, consecutive, &adm[1]);
+    measureDirection(board, x, y, 1,  0, player, consecutive, &adm[2]);
+    measureDirection(board, x, y, 1, -1, player, consecutive, &adm[3]);
+}
