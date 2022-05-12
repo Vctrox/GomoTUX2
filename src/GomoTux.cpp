@@ -2,6 +2,7 @@
 #include "Board.hpp"
 #include "globals.hpp"
 
+
 using namespace std;
 
 GomoTux::GomoTux(){
@@ -75,4 +76,45 @@ void GomoTux::measureInOneDirection(const char *board,
             result->blocks = 1;
         }
     }
+}
+
+int GomoTux::matchPattern(MeasureMove *all_direction_measurement,
+                              Pattern *patterns) {
+    // Check arguments
+    if (all_direction_measurement == nullptr) return -1;
+    if (patterns == nullptr) return -1;
+
+    // Increment PM count
+    //g_pm_count++;
+
+    // Initialize match_count to INT_MAX since minimum value will be output
+    int match_count = numeric_limits<int>::max(), single_pattern_match = 0;
+
+    // Currently allows maximum 2 patterns
+    for (int i = 0; i < 2; ++i) {
+        auto p = patterns[i];
+        if (p.length == 0) break;
+
+        // Initialize counter
+        single_pattern_match = 0;
+
+        // Loop through 4 directions
+        for (int j = 0; j < 4; ++j) {
+            auto dm = all_direction_measurement[j];
+
+            // Requires exact match
+            if (dm.length == p.length &&
+                (p.blocks == -1 || dm.blocks == p.blocks) &&
+                (p.spaces == -1 || dm.spaces == p.spaces)) {
+                single_pattern_match++;
+            }
+        }
+
+        // Consider minimum number of occurrences
+        single_pattern_match /= p.min_occur;
+
+        // Take smaller value
+        match_count = match_count >= single_pattern_match ? single_pattern_match : match_count;
+    }
+    return match_count;
 }
