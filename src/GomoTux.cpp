@@ -8,9 +8,11 @@ using namespace std;
 GomoTux::GomoTux(){
     patterns = new Pattern[pattern_size * 2];
     scores = new int[pattern_size];
+    
+    int patterns_skip[6] = {11, 11, 10, 7, 1, 0};
+
     memcpy(patterns, g_patterns, sizeof(char) * 11 * 2);
     memcpy(scores, g_scores, sizeof(int) * 11);
-
 }
 
 
@@ -157,7 +159,7 @@ int GomoTux::evalMove(const char *board, int x, int y, int player) {
         int score = evalInAllDirections(allDirections);
 
 
-        cout << g_pattern_skip;
+        cout << pattern_skip;
         // Prefer consecutive
         // if (!consecutive) score *= 0.9;
 
@@ -185,7 +187,7 @@ int GomoTux::evalInAllDirections(GomoTux::MeasureMove *all_direction_measurement
         max_measured_len = len > max_measured_len ? len : max_measured_len;
         score += len - 1;
     }
-    int start_pattern = g_pattern_skip[max_measured_len];
+    int start_pattern = pattern_skip[max_measured_len];
 
     // Loop through and try to match all preset patterns
     for (int i = start_pattern; i < size; ++i) {
