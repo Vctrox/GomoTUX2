@@ -2,6 +2,7 @@
 #define GOMOTUX_H
 
 #include <cstring>
+#include <limits>
 #include "globals.hpp"
 
 const int pattern_size = 11;
@@ -26,7 +27,7 @@ class GomoTux {
     public:
         GomoTux();
             // Measure a single direction
-            static void measureInOneDirection(const char *board,
+            void measureInOneDirection(const char *board,
                                  int x, int y,
                                  int dx, int dy,
                                  int player,
@@ -43,5 +44,10 @@ class GomoTux {
 
             
 
+            int matchPattern(MeasureMove *all_direction_measurement,
+                            Pattern *patterns);
+};
+
+            
 
 #endif
