@@ -11,6 +11,7 @@ class GomoTux {
 
     public:
         GomoTux();
+        ~GomoTux();
         int evaluation(const char *board);
 };
 

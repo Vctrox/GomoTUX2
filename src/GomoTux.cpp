@@ -15,3 +15,6 @@ int GomoTux::evaluate(const char* board){
     int count = 0;
     return count;
 }
+
+
+GomoTux::~GomoTux(){}
