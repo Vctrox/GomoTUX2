@@ -135,3 +135,35 @@ int GomoTux::matchPattern(MeasureMove *all_direction_measurement,
     }
     return match_count;
 }
+
+int GomoTux::evalMove(const char *board, int x, int y, int player) {
+    // Check parameters
+    if (board == nullptr ||
+        player < 1 || player > 2) return 0;
+
+    // Count evaluations
+    //++g_eval_count;
+
+    // Allocate 4 direction measurements
+    MeasureMove allDirections[4];
+
+    // Measure in consecutive and non-consecutive conditions
+    int max_score = 0;
+    for (bool consecutive = false;; consecutive = true) {
+        // Execute measurement
+        measureInAllDirections(board, x, y, player, consecutive, allDirections);
+
+        int score = evalInAllDirections(allDirections);
+
+
+        cout << g_pattern_skip;
+        // Prefer consecutive
+        // if (!consecutive) score *= 0.9;
+
+        // Choose the better between consecutive and non-consecutive
+        max_score = std::max(max_score, score);
+
+        if (consecutive) break;
+    }
+    return max_score;
+}
