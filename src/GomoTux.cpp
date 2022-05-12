@@ -85,14 +85,15 @@ void GomoTux::measureInAllDirections(const char *board,
                                        bool consecutive,
                                        GomoTux::MeasureMove *adm) {
     // Check arguments
-    if (gs == nullptr) return;
+    if (board == nullptr) return;
     if (x < 0 || x >= g_size || y < 0 || y >= g_size) return;
 
     // Measure 4 directions
-    measureDirection(board, x, y, 0,  1, player, consecutive, &adm[0]);
-    measureDirection(board, x, y, 1,  1, player, consecutive, &adm[1]);
-    measureDirection(board, x, y, 1,  0, player, consecutive, &adm[2]);
-    measureDirection(board, x, y, 1, -1, player, consecutive, &adm[3]);
+    measureInOneDirection(board, x, y, 0,  1, player, consecutive, &adm[0]);
+    measureInOneDirection(board, x, y, 1,  1, player, consecutive, &adm[1]);
+    measureInOneDirection(board, x, y, 1,  0, player, consecutive, &adm[2]);
+    measureInOneDirection(board, x, y, 1, -1, player, consecutive, &adm[3]);
+}
     
 int GomoTux::matchPattern(MeasureMove *all_direction_measurement,
                               Pattern *patterns) {

@@ -39,10 +39,7 @@ class GomoTux {
                                        int c,
                                        int player,
                                        bool consecutive,
-                                       GomoTux::MeasureMove *adm);
-};
-
-            
+                                       GomoTux::MeasureMove *adm);            
 
             int matchPattern(MeasureMove *all_direction_measurement,
                             Pattern *patterns);
