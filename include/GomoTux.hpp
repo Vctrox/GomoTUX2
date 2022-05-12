@@ -21,16 +21,17 @@ class GomoTux {
         };
         Pattern *patterns;
         int *scores;
-        int pattern_skip[];
+        int *pattern_skip;
 
-    public:RenjuAIEval::DirectionMeasurement
+    public:
         GomoTux();
-        static void MeasureDirection(const char *board,
+            // Measure a single direction
+            static void measureInOneDirection(const char *board,
                                  int x, int y,
                                  int dx, int dy,
                                  int player,
                                  bool consecutive,
                                  GomoTux::MeasureMove *result);
-};
+            };
 
 #endif
