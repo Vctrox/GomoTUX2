@@ -17,6 +17,7 @@ git clone https://github.com/nami10/GomoTux2 && cd ./GomoTux2
 ### CMake the project
 
 ```bash
+mkdir build
 cd build
 cmake ..
 make
