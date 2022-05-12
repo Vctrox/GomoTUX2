@@ -15,7 +15,7 @@ const char ALPHABET[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'
 class Board
 {
 private:
-    char board[N][N];
+    char board[N*N];
     int movesCount;
 
 public:
