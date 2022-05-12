@@ -2,7 +2,9 @@
 #define GOMOTUX_H
 
 #include <cstring>
-#include "patterns.hpp"
+#include "globals.hpp"
+
+const int size = 11;
 
 class GomoTux {
     private:
@@ -15,11 +17,13 @@ class GomoTux {
 
         pattern *patterns;
         int *scores;
+        int pattern_skip[];
 
     public:
         GomoTux();
         ~GomoTux();
         int evaluation(const char *board);
+        int winner(const char *gs);
 };
 
 #endif
