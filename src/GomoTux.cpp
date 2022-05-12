@@ -38,8 +38,8 @@ int GomoTux::evaluationMove(const char* board, int r, int c, char player){
     int max_score = 0;
     for (bool consecutive = false;; consecutive = true) {
 
-        measureAllDirections(board, r, c, player, consecutive, tdp);
-        int score = evalADM(adm);
+        measureAllDeplacement(board, r, c, player, consecutive, tdp);
+        int score = evalTDP(tdp);
         max_score = std::max(max_score, score);
 
         if (consecutive) break;
@@ -59,19 +59,18 @@ int GomoTux::winner(const char *board) {
     }
 }
 
-void GomoTux::measureDeplacement(const char *gs,
-                                   int r, int c,
-                                   int dr, int dc,
+void GomoTux::measureDeplacement(const char *board,
+                                   int x, int y,
+                                   int dx, int dy,
                                    int player,
                                    bool consecutive,
                                    Deplacement*result) {
-    // Check arguments
-    if (gs == nullptr) return;
-    if (r < 0 || r >= g_size || c < 0 || c >= g_size) return;
-    if (dr == 0 && dc == 0) return;
 
-    // Initialization
-    int cr = r, cc = c;
+    if (board == nullptr) return;
+    if (x < 0 || x >= g_size || x < 0 || x >= g_size) return;
+    if (dx == 0 && dy == 0) return;
+
+    int cx = x, cy = y;
     result->length = 1, result->blocks = 2, result->spaces = 0;
 
     int space_allowance = 1;
@@ -79,18 +78,15 @@ void GomoTux::measureDeplacement(const char *gs,
 
     for (bool reversed = false;; reversed = true) {
         while (true) {
-            // Move
-            cr += dr; cc += dc;
+        
+            cx += dx; cy += dy;
 
-            // Validate position
-            if (cr < 0 || cr >= g_size || cc < 0 || cc >= g_size) break;
+            if (cx < 0 || cx >= g_size || cy < 0 || cx >= g_size) break;
 
-            // Get cell value
-            int cell = gs[g_size * cr + cc];
+            int cell = board[g_size * cx + cy];
 
-            // Empty cells
             if (cell == 0) {
-                if (space_allowance > 0 && Board[(cr+dr)*g_size+cc+dc] == player) {
+                if (space_allowance > 0 && Board[(cx+dx)*g_size+cy+dy] == player) {
                     space_allowance--; result->spaces++;
                     continue;
                 } else {
@@ -99,20 +95,16 @@ void GomoTux::measureDeplacement(const char *gs,
                 }
             }
 
-            // Another player
             if (cell != player) break;
 
-            // Current player
             result->length++;
         }
 
-        // Reverse direction and continue (just once)
         if (reversed) break;
-        cr = r; cc = c;
-        dr = -dr; dc = -dc;
+        cx = x; cy = y;
+        dx = -dx; dy = -dy;
     }
 
-    // More than 5 pieces in a row is equivalent to 5 pieces
     if (result->length >= 5) {
         if (result->spaces == 0) {
             result->length = 5;
