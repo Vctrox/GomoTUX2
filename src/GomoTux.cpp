@@ -10,6 +10,7 @@ GomoTux::GomoTux(){
     scores = new int[pattern_size];
     memcpy(patterns, g_patterns, sizeof(char) * 11 * 2);
     memcpy(scores, g_scores, sizeof(int) * 11);
+
 }
 
 
@@ -134,4 +135,29 @@ int GomoTux::matchPattern(MeasureMove *all_direction_measurement,
         match_count = match_count >= single_pattern_match ? single_pattern_match : match_count;
     }
     return match_count;
+}
+
+int GomoTux::evalInAllDirections(GomoTux::MeasureMove *all_direction_measurement) {
+    int score = 0;
+    int size = g_pattern_size;
+
+    // Add to score by length on each direction
+    // Find the maximum length in ADM and skip some patterns
+    int max_measured_len = 0;
+    for (int i = 0; i < 4; i++) {
+        int len = all_direction_measurement[i].length;
+        max_measured_len = len > max_measured_len ? len : max_measured_len;
+        score += len - 1;
+    }
+    int start_pattern = g_pattern_skip[max_measured_len];
+
+    // Loop through and try to match all preset patterns
+    for (int i = start_pattern; i < size; ++i) {
+        score += matchPattern(all_direction_measurement, &patterns[2 * i]) * g_scores[i];
+
+        // Only match one threatening pattern
+        if (score >= 300) break;
+    }
+
+    return score;
 }

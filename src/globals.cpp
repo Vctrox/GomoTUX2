@@ -1,6 +1,6 @@
 #include "globals.hpp"
 
-int patterns_skip[6] = {11, 11, 10, 7, 1, 0};
+int g_patterns_skip[6] = {11, 11, 10, 7, 1, 0};
 
 const int g_pattern_size = 11;
 

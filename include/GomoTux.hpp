@@ -43,6 +43,8 @@ class GomoTux {
 
             int matchPattern(MeasureMove *all_direction_measurement,
                             Pattern *patterns);
+
+            int evalInAllDirections(MeasureMove *all_direction_measurement);
 };
 
             
