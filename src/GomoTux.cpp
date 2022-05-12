@@ -166,10 +166,12 @@ int GomoTux::evalMove(const char *board, int x, int y, int player) {
 
         if (consecutive) break;
 
-        return max_score;
+        
     }
 
-    
+    return max_score;
+}
+
     
 int GomoTux::evalInAllDirections(GomoTux::MeasureMove *all_direction_measurement) {
     int score = 0;
