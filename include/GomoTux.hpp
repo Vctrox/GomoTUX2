@@ -8,33 +8,29 @@ const int size = 11;
 
 class GomoTux {
     private:
-        struct pattern {
+        struct Pattern {
             char min_occur;
             char length;
             char blocks;
             char spaces;
         };
-        struct Deplacement{
+        struct MeasureMove{
             char length;
             char blocks;
             char spaces;
         };
-        pattern *patterns;
+        Pattern *patterns;
         int *scores;
         int pattern_skip[];
 
-    public:
+    public:RenjuAIEval::DirectionMeasurement
         GomoTux();
-        int evaluation(const char *board, char player);
-        int evaluationMove(const char* board, int r, int c, char player);
-        ~GomoTux();
-        int winner(const char *gs);
-        void measureDeplacement(const char *gs,
-                                   int r, int c,
-                                   int dr, int dc,
-                                   int player,
-                                   bool consecutive,
-                                   Deplacement *result);
+        static void MeasureDirection(const char *board,
+                                 int x, int y,
+                                 int dx, int dy,
+                                 int player,
+                                 bool consecutive,
+                                 GomoTux::MeasureMove *result);
 };
 
 #endif
