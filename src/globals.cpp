@@ -34,3 +34,5 @@ int g_scores[11] = {
     20,
     9
 };
+
+int g_size=15;

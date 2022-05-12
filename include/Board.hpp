@@ -1,9 +1,9 @@
 #ifndef BOARD_H
 #define BOARD_H
 
+#include "globals.hpp"
 #include <iostream>
 #include <string>
-#include "globals.hpp"
 
 using namespace std;
 
@@ -15,7 +15,7 @@ const char ALPHABET[26] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'
 class Board
 {
 private:
-    char board[g_size * g_size];
+    char* board;
     int movesCount;
 
 public:
