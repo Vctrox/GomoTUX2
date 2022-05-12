@@ -1,6 +1,7 @@
 #ifndef GOMOTUX_H
 #define GOMOTUX_H
 
+#include <cstring>
 #include "patterns.hpp"
 
 class GomoTux {
@@ -11,6 +12,6 @@ class GomoTux {
     public:
         GomoTux();
         int evaluation(const char *board);
-}
+};
 
 #endif
