@@ -44,13 +44,10 @@ class GomoTux {
             int matchPattern(MeasureMove *all_direction_measurement,
                             Pattern *patterns);
 
-<<<<<<< HEAD
             // Evaluate one possible move as a player
             int evalMove(const char *board, int x, int y, int player);
 
-=======
             int evalInAllDirections(MeasureMove *all_direction_measurement);
->>>>>>> 3aa9167534ae9352f7ec77f2fef0c899b89b8965
 };
 
             
