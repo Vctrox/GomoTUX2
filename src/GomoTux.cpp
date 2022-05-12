@@ -10,7 +10,10 @@ GomoTux::GomoTux(){
     memcpy(scores, g_scores, sizeof(int) * 11);
 }
 
-int GomoTux::evaluate(const char* board){
+int GomoTux::evaluation(const char* board){
     int count = 0;
     return count;
 }
+
+
+GomoTux::~GomoTux(){}
