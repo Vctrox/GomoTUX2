@@ -199,3 +199,19 @@ int GomoTux::evalInAllDirections(GomoTux::MeasureMove *all_direction_measurement
 
     return score;
 }
+
+
+int GomoTux::evalBoard(const char *board, int player) {
+    // Check parameters
+    if (board == nullptr ||
+        player < 1 || player > 2) return 0;
+
+    // Evaluate all possible moves
+    int score = 0;
+    for (int i = 0; i < g_size; ++i) {
+        for (int j = 0; j < g_size; ++j) {
+            score += evalMove(board, i, j, player);
+        }
+    }
+    return score;
+}

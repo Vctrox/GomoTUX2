@@ -48,6 +48,8 @@ class GomoTux {
             int evalMove(const char *board, int x, int y, int player);
 
             int evalInAllDirections(MeasureMove *all_direction_measurement);
+            
+            int evalBoard(const char *board, int player);
 };
 
             
