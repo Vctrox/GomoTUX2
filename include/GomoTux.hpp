@@ -4,7 +4,7 @@
 #include <cstring>
 #include "globals.hpp"
 
-const int size = 11;
+const int pattern_size = 11;
 
 class GomoTux {
     private:

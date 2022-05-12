@@ -4,7 +4,7 @@ using namespace std;
 
 Board::Board()
 {
-    board = new board[g_size];
+    board = new char[g_size];
 
     for (int i = 0; i < g_size; i++)
         for (int j = 0; j < g_size; j++)

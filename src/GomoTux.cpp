@@ -1,16 +1,15 @@
 #include "GomoTux.hpp"
 #include "Board.hpp"
 #include "globals.hpp"
-#include "patterns.hpp"
 
 using namespace std;
 
 GomoTux::GomoTux(){
 
-    patterns = new pattern[size * 2];
-    scores = new int[size];
+    patterns = new pattern[pattern_size * 2];
+    scores = new int[pattern_size];
 
-    memcpy(*patterns, g_patterns, sizeof(char) * 11 * 2);
+    //memcpy(*patterns, g_patterns, sizeof(char) * 11 * 2);
     memcpy(scores, g_scores, sizeof(int) * 11);
 
 }
@@ -38,8 +37,8 @@ int GomoTux::evaluationMove(const char* board, int r, int c, char player){
     int max_score = 0;
     for (bool consecutive = false;; consecutive = true) {
 
-        measureAllDeplacement(board, r, c, player, consecutive, tdp);
-        int score = evalTDP(tdp);
+        //measureAllDeplacement(board, r, c, player, consecutive, tdp);
+        int score = 1;//evalTDP(tdp);
         max_score = std::max(max_score, score);
 
         if (consecutive) break;
@@ -86,7 +85,7 @@ void GomoTux::measureDeplacement(const char *board,
             int cell = board[g_size * cx + cy];
 
             if (cell == 0) {
-                if (space_allowance > 0 && Board[(cx+dx)*g_size+cy+dy] == player) {
+                if (space_allowance > 0 && board[(cx+dx)*g_size+cy+dy] == player) {
                     space_allowance--; result->spaces++;
                     continue;
                 } else {
