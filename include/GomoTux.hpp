@@ -4,6 +4,8 @@
 #include <cstring>
 #include "globals.hpp"
 
+const int size = 11;
+
 class GomoTux {
     private:
         struct pattern {
@@ -19,11 +21,20 @@ class GomoTux {
         };
         pattern *patterns;
         int *scores;
+        int pattern_skip[];
 
     public:
         GomoTux();
         int evaluation(const char *board, char player);
         int evaluationMove(const char* board, int r, int c, char player);
+        ~GomoTux();
+        int winner(const char *gs);
+        void measureDeplacement(const char *gs,
+                                   int r, int c,
+                                   int dr, int dc,
+                                   int player,
+                                   bool consecutive,
+                                   Deplacement *result);
 };
 
 #endif
