@@ -10,7 +10,7 @@ class GomoTux {
 
     public:
         GomoTux();
-        int evaluation(const char *board);
-}
+        int evaluate(const char *board);
+};
 
 #endif
