@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include "globals.hpp"
 
 using namespace std;
 
