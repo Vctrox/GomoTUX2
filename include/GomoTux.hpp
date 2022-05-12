@@ -6,7 +6,14 @@
 
 class GomoTux {
     private:
-        char **patterns;
+        struct pattern {
+            char min_occur;
+            char length;
+            char blocks;
+            char spaces;
+        };
+
+        pattern *patterns;
         int *scores;
 
     public:
