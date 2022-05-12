@@ -1,4 +1,6 @@
 #include "GomoTux.hpp"
+#include "Board.hpp"
+#include "patterns.hpp"
 
 using namespace std;
 
@@ -11,7 +13,20 @@ GomoTux::GomoTux(){
 
 }
 
-int GomoTux::evaluation(const char* board){
+int GomoTux::evaluation(const char* board, char player){
+    if (board == nullptr ||
+        player == EMPTY_SYMBOL || player !=PLAYER_SYMBOL || player != COMPUTER_SYMBOL) return 0;
+
+    // Evaluate all possible moves
     int count = 0;
+    for (int r = 0; r < N; ++r) {
+        for (int c = 0; c < N; ++c) {
+            count += evaluationMove(board, r, c, player);
+        }
+    }
     return count;
+}
+
+int GomoTux::evaluationMove(const char* board, int r, int c, char player){
+    return 0;
 }

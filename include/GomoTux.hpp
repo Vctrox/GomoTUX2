@@ -11,7 +11,8 @@ class GomoTux {
 
     public:
         GomoTux();
-        int evaluation(const char *board);
+        int evaluation(const char *board, char player);
+        int evaluationMove(const char* board, int r, int c, char player);
 };
 
 #endif
