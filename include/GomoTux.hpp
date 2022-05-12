@@ -3,11 +3,8 @@
 
 #include <cstring>
 #include "globals.hpp"
-<<<<<<< HEAD
 
 const int size = 11;
-=======
->>>>>>> 9809c5c74fb7a51444c87746e89e7c6278858e06
 
 class GomoTux {
     private:
