@@ -4,7 +4,7 @@ int patterns_skip[6] = {11, 11, 10, 7, 1, 0};
 
 const int g_pattern_size = 11;
 
-char g_pattern[g_pattern_size * 2][4] = {
+char g_patterns[g_pattern_size * 2][4] = {
     {1, 5,  0,  0}, {0, 0,  0,  0},  // 10000
     {1, 4,  0,  0}, {0, 0,  0,  0},  // 700
     {2, 4,  1,  0}, {0, 0,  0,  0},  // 700
