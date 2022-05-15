@@ -43,7 +43,7 @@ char **board;
 board = new char[15][15];
 ```
 
-<img title="" src="./img/2d array.png" alt="Dynamic memory allocation in C++ for 2D array" data-align="center">
+<img title="" src="./img/2d array.png" alt="Dynamic memory allocation in C++ for 2D array" data-align="center"/>
 
 ### Tableau de caractère (version finale)
 
@@ -59,7 +59,7 @@ char *board;
 board = new char[225];
 ```
 
-<img src="./img/1d array.png" title="" alt="" data-align="center">
+<img src="./img/1d array.png" title="" alt="Dynamic memory allocation in C++ for 1D array" data-align="center"/>
 
 ## Heuristique
 
@@ -105,7 +105,7 @@ Exemple avec le motif `.OXO.`:
 
 On retrouve le motif 7 fois :
 
-<img src="./img/count.png" title="" alt="" data-align="center">
+<img src="./img/count.png" title="" alt="pattern count example" data-align="center"/>
 
 En **bleu** les motifs corrects, en **rouge** le faux positif.
 
@@ -146,7 +146,8 @@ Exemple de plateau :
 14 -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 ```
 
- La fonction `adjacent(8,7)` va regarder autour d'elle et appliquer l'algorithme minimax de 1 profondeur pour retourner le coup à jouer.<img src="./img/adjacent.png" title="" alt="" data-align="center">
+La fonction `adjacent(8,7)` va regarder autour d'elle et appliquer l'algorithme minimax de 1 profondeur pour retourner le coup à jouer.
+<img src="./img/adjacent.png" title="" alt="adjacent example" data-align="center"/>
 
 ## Deuxieme heuristique
 
