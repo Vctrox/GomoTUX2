@@ -43,7 +43,7 @@ char **board;
 board = new char[15][15];
 ```
 
-<img title="" src="https://www.techiedelight.com/wp-content/uploads/Dynamically-Allocate-Memory-for-2D-Array.png" alt="Dynamic memory allocation in C++ for 2D array" data-align="center">
+<img title="" src="./img/2d array.png" alt="Dynamic memory allocation in C++ for 2D array" data-align="center">
 
 ### Tableau de caractère (version finale)
 
@@ -59,7 +59,7 @@ char *board;
 board = new char[225];
 ```
 
-<img src="file:///C:/Users/Tom/AppData/Roaming/marktext/images/2022-05-15-12-17-23-image.png" title="" alt="" data-align="center">
+<img src="./img/1d array.png" title="" alt="" data-align="center">
 
 ## Heuristique
 
@@ -105,7 +105,7 @@ Exemple avec le motif `.OXO.`:
 
 On retrouve le motif 7 fois :
 
-<img src="file:///C:/Users/Tom/AppData/Roaming/marktext/images/2022-05-15-13-57-11-image.png" title="" alt="" data-align="center">
+<img src="./img/count.png" title="" alt="" data-align="center">
 
 En **bleu** les motifs corrects, en **rouge** le faux positif.
 
@@ -146,7 +146,7 @@ Exemple de plateau :
 14 -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 ```
 
- La fonction `adjacent(8,7)` va regarder autour d'elle et appliquer l'algorithme minimax de 1 profondeur pour retourner le coup à jouer.<img src="file:///C:/Users/Tom/AppData/Roaming/marktext/images/2022-05-15-14-04-10-image.png" title="" alt="" data-align="center">
+ La fonction `adjacent(8,7)` va regarder autour d'elle et appliquer l'algorithme minimax de 1 profondeur pour retourner le coup à jouer.<img src="./img/adjacent.png" title="" alt="" data-align="center">
 
 ## Deuxieme heuristique
 
@@ -154,7 +154,7 @@ Exemple de plateau :
 
 Nous avons constaté que notre première heuristique prenait trop de temps par rapport au 5s imposées par le sujet. Malgrè l'iterative deepening, chaque tours prenait plus d'une minute de calcule. Nous avons decidé de le modifer en s'inspirant d'heuristique trouvés sur internet:
 
-- [lien 1]()
+- [reference github](https://github.com/yunzhu-li/blupig-gomoku)
 - [lien 2]()
 - [lien 3]()
 
