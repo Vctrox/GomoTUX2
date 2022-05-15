@@ -199,6 +199,23 @@ La methode choisi ne recherche pas des motifs sur seulement une dimension mais a
 
 ---
 
+***700 points*** 
+
+----
+
+| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
+|---|---|---|---|---|---|---|---|
+| A | . | O | . | . | . | . | . | 
+| B | O | X | X | X | X | . | . | 
+| C | . | X | . | . | . | . | . | 
+| D | . | X | . | . | . | . | . | 
+| E | . | X | . | . | . | . | . | 
+| F | . | . | . | . | . | . | . | 
+
+***Représentation {2, 4,  1,  0}, {0, 0,  0,  0}***
+
+----
+
 Liste des motifs associés à leur score :
 
 ```c++
