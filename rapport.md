@@ -309,3 +309,9 @@ On retouve 1 fois dans les 4 direction le premier motif et 1 fois dans les 4 dir
 `{2, 4, 1, 0}, {0, 0, 0, 0}`
 
 On retrouve 1 fois le premier motif. Cependant on remarque que le nombre d'occurence minimum est de 2. Les points ne sont pas assignés.
+
+### Iterative deepening
+
+Afin d'etre certain de respecter les 5 secondes imposées mais aussi de pouvoir aller le plus loin possible dans la fonction MinMax nous avons rajouté l'iterative deepening. Le principe est de calculer à la profondeur 1 puis 2 puis 3,... Et si l'algorithme ne depasse le temps imposé, il continura encore à la profondeur suivante.
+
+Ce systeme est contre-intuitif. En effet cela impose a l'algorithme plus de calcule. Cependant la couche `n+1` necessite plus de temps que toute les couche `i<n` car le temps de calcule est expodentielle. De faite ce systeme permet d'etre sur que l'algorithme atteind la couche la plus profonde possible dans les 5s imposées.
