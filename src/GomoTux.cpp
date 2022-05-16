@@ -11,7 +11,7 @@ GomoTux::GomoTux(){
     
     int patterns_skip[6] = {11, 11, 10, 7, 1, 0};
 
-    memcpy(patterns, g_patterns, sizeof(char) * 11 * 2);
+    memcpy(patterns, g_patterns, sizeof(Pattern) * 11 * 2);
     memcpy(scores, g_scores, sizeof(int) * 11);
 }
 
@@ -158,8 +158,6 @@ int GomoTux::evalMove(const char *board, int x, int y, int player) {
 
         int score = evalInAllDirections(allDirections);
 
-
-        cout << pattern_skip;
         // Prefer consecutive
         // if (!consecutive) score *= 0.9;
 
