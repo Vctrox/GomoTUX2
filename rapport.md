@@ -65,7 +65,7 @@ board = new char[225];
 
 ### "Pattern" avec Regex
 
-Lorsqu'on transforme la board en une suite de caractère on arrive à retrouver des motifs en particulier, c'est avec ces motifs qu'on peut évaluer un état du plateau.
+Lorsqu'on transforme le plateau en une suite de caractère on arrive à retrouver des motifs en particulier, c'est avec ces motifs qu'on peut évaluer un état du plateau.
 
 **Remarque :**
 
@@ -74,7 +74,7 @@ Lorsqu'on transforme la board en une suite de caractère on arrive à retrouver 
 - Diagonale \\ : chaque caractère du motif est espacé de 15 caractères quelconque
 - Diagonale / : chaque caractère du motif est espacé de 13 caractère quelconque
 
-Exemple avec le motif `.OXO.`: 
+Exemple avec le motif `-X-`: 
 
 ```bash
    0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 
@@ -310,6 +310,6 @@ On retrouve 1 fois le premier motif. Cependant on remarque que le nombre d'occur
 
 ### Iterative deepening
 
-Afin d'etre certain de respecter les 5 secondes imposées mais aussi de pouvoir aller le plus loin possible dans la fonction MinMax nous avons rajouté l'iterative deepening. Le principe est de calculer à la profondeur 1 puis 2 puis 3,... Et si l'algorithme ne depasse le temps imposé, il continura encore à la profondeur suivante.
+Afin d'etre certains de respecter les 5 secondes imposées mais aussi de pouvoir aller le plus loin possible dans la fonction MinMax nous avons rajouté l'iterative deepening. Le principe est de calculer à la profondeur 1 puis 2 puis 3,... Et si l'algorithme ne depasse le temps imposé, il continura encore à la profondeur suivante.
 
 Ce systeme est contre-intuitif. En effet cela impose a l'algorithme plus de calcule. Cependant la couche `n+1` necessite plus de temps que toute les couche `i<n` car le temps de calcule est expodentielle. De faite ce systeme permet d'etre sur que l'algorithme atteind la couche la plus profonde possible dans les 5s imposées.
