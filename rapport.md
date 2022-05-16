@@ -128,20 +128,20 @@ Une autre heuristique pour éviter de parcourir tout le plateau était de "voir"
 Exemple de plateau :
 
 ```
-   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 
+   0  1  2  3  4  5  6  7  8  9  10 11 12 13 14
 0  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 1  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 2  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 3  -  -  -  -  -  -  -  -  O  -  -  -  -  -  -
-4  -  -  -  -  -  -  -  X  X  O  -  -  -  -  -  
+4  -  -  -  -  -  -  -  X  X  O  -  -  -  -  -
 5  -  -  -  -  -  -  O  O  O  X  -  -  -  -  -
-6  -  -  -  -  -  -  -  X  O  -  -  -  -  -  -  
+6  -  -  -  -  -  -  -  X  O  -  -  -  -  -  -
 7  -  -  -  -  -  -  -  X  O  X  -  -  -  -  -
-8  -  -  -  -  -  -  -  X  X  -  -  -  -  -  -  
+8  -  -  -  -  -  -  -  X  X  -  -  -  -  -  -
 9  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
-10 -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+10 -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 11 -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
-12 -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  
+12 -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 13 -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 14 -  -  -  -  -  -  -  -  -  -  -  -  -  -  -
 ```
@@ -153,17 +153,15 @@ La fonction `adjacent(8,7)` va regarder autour d'elle et appliquer l'algorithme 
 
 ### Ideation
 
-Nous avons constaté que notre première heuristique prenait trop de temps par rapport au 5s imposées par le sujet. Malgrè l'iterative deepening, chaque tours prenait plus d'une minute de calcule. Nous avons decidé de le modifer en s'inspirant d'heuristique trouvés sur internet:
+Nous avons constaté que notre première heuristique prenait trop de temps par rapport au 5s imposées par le sujet. Malgré l'iterative deepening, chaque tours prenait plus d'une minute de calcule. Nous avons decidé de le modifer en s'inspirant d'heuristique trouvé sur internet :
 
-- [reference github](https://github.com/yunzhu-li/blupig-gomoku)
-- [lien 2]()
-- [lien 3]()
+- [reference](https://github.com/yunzhu-li/blupig-gomoku)
 
 Nous nous sommes donc tournés vers une methode à la fois efficace en terme de temps mais surtout en terme de score.  
 
 ### Representation motif
 
-La reprensation est sous la forme {$p_1$,$p_2$,$p_3$,$p_4$} avec pour signification où $p_i$ est le paramètre $i$:
+La reprensation est sous la forme {$p_1$,$p_2$,$p_3$,$p_4$} avec pour signification où $p_i$ est le paramètre $i$ :
 
 - $p_1$ : Le nombre minimum d'occurence du motif. Par exemple si $p_1 = 2$ alors le motif doit se retrouver:
   
@@ -203,14 +201,14 @@ La methode choisi ne recherche pas des motifs sur seulement une dimension mais a
 
 ----
 
-| 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
-|---|---|---|---|---|---|---|---|
-| A | . | O | . | . | . | . | . | 
-| B | O | X | X | X | X | . | . | 
-| C | . | X | . | . | . | . | . | 
-| D | . | X | . | . | . | . | . | 
-| E | . | X | . | . | . | . | . | 
-| F | . | . | . | . | . | . | . | 
+| #   | 1   | 2   | 3   | 4   | 5   | 6   | 7   |
+|:---:|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| A   | .   | O   | .   | .   | .   | .   | .   |
+| B   | O   | X   | X   | X   | X   | .   | .   |
+| C   | .   | X   | .   | .   | .   | .   | .   |
+| D   | .   | X   | .   | .   | .   | .   | .   |
+| E   | .   | X   | .   | .   | .   | .   | .   |
+| F   | .   | .   | .   | .   | .   | .   | .   |
 
 ***Représentation {2, 4,  1,  0}, {0, 0,  0,  0}***
 
@@ -236,7 +234,7 @@ Liste des motifs associés à leur score :
 
 ### Recherche
 
-Pour trouver les motifs, l'algorithme va parcourir toute la board de cette facon:
+Pour trouver les motifs, l'algorithme va parcourir toute la board de cette facon :
 
 1. Instantier un tableau$^{(1)}$ de taille 4, une pour chaque directions :
    
@@ -248,7 +246,7 @@ Pour trouver les motifs, l'algorithme va parcourir toute la board de cette facon
    
    - Colonne
 
-2. On parcoure chaque points deux fois:
+2. On parcoure chaque points deux fois :
    
    - Une fois en autorisant un espace dans la recherche
    
